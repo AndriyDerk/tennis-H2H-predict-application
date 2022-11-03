@@ -47,10 +47,7 @@ class userController{
             firstName = firstName.replace(' ','-')
             secondName = secondName.replace(' ','-')
 
-
-            console.log(firstName + " " + secondName)
-
-
+            const alongNYears = process.env.ALONGNYEARS
             let value
             for(let i = date.getFullYear(); i > date.getFullYear()-5; i--){
                 const firstPlayerData = await getHTML(`https://www.tennisexplorer.com/player/${firstName}/?annual=${i}`).catch(err=>{
@@ -160,12 +157,8 @@ class userController{
 
             }
 
-            console.log('\n---------------------------------------------\n')
-            console.log(firstArr.length)
-            console.log('\n---------------------------------------------\n')
-            console.log(secondArr.length)
-
             /************************************************/
+
             let tf=0
             let firstResults = [], secondResults = [], firstResultsOverall = [], secondResultsOverall = [], sum1Overall=0, sum2Overall=0, sum1=0, sum2=0
             for(let i = 0; i < firstArr.length; i++){//calculate for firstPerson
@@ -244,15 +237,28 @@ class userController{
                 }
             }
 
+            firstResults.sort(function(a, b) {
+                return b.number - a.number ;
+            });
+
+            firstResultsOverall.sort(function(a, b) {
+                return b.number - a.number ;
+            });
+
+            secondResults.sort(function(a, b) {
+                return b.number - a.number ;
+            });
+
+            secondResultsOverall.sort(function(a, b) {
+                return b.number - a.number ;
+            });
+
             firstResults.forEach((point)=>{
                 point.number=((point.number/sum1)*100).toFixed(2)+'%'
-                console.log(point)
             })
-            console.log('-------------------------------')
 
            secondResults.forEach((point)=>{
                 point.number=((point.number/sum2)*100).toFixed(2)+'%'
-                console.log(point)
            })
 
             firstResultsOverall.forEach((point)=>{
