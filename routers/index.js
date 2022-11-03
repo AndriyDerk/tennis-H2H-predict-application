@@ -3,6 +3,6 @@ const userRouter = require('../controllers/user.controller')
 
 const router = new Router()
 
-router.post('/', userRouter.postStatistic)
+router.get('/', userRouter.postStatistic)
 
 module.exports = router
